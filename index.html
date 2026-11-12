@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RF Fios Premium</title>
+<style>
+:root{--bg:#090909;--panel:#151515;--gold:#c9a45c;--cream:#f3e6c7;--muted:#aaa;--line:#393126}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f7f3eb;font-family:Arial,sans-serif}
+header{padding:20px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #29241d;background:#090909;position:sticky;top:0}
+.logo{font:22px Georgia;color:var(--cream);letter-spacing:3px}.logo small{display:block;font:10px Arial;letter-spacing:4px;color:var(--gold);margin-top:5px}
+button,.btn{background:var(--gold);border:1px solid var(--gold);color:#17120a;padding:12px 17px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block}
+button.secondary{background:transparent;color:var(--cream)}
+.hero{padding:80px 9%;min-height:440px;background:radial-gradient(ellipse at 80%,#382b18,transparent 45%),#0b0b0b}
+.kicker{color:var(--gold);letter-spacing:4px;font-size:11px}.hero h1{font:clamp(42px,7vw,76px) Georgia;font-weight:400;margin:18px 0}.hero h1 em{color:var(--cream);font-style:normal}.hero p{color:#bbb;line-height:1.8;max-width:540px}
+main{max-width:1100px;margin:auto;padding:55px 6%}.heading{text-align:center;margin-bottom:30px}.heading h2{font:38px Georgia;font-weight:400;margin:10px}.heading p,.muted{color:var(--muted);line-height:1.6}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.service,.panel{background:var(--panel);border:1px solid var(--line);padding:20px}.service h3{font:23px Georgia;color:var(--cream);font-weight:400}.service p{color:#aaa;font-size:13px;line-height:1.6}
+.booking-area{background:#100e0b;border-block:1px solid #302719}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}.field label{font-size:11px;color:var(--gold);letter-spacing:1px}.field input,.field select,.field textarea{background:#090909;border:1px solid #494032;color:#fff;padding:12px;width:100%}.field.full{grid-column:1/-1}.slots{display:flex;flex-wrap:wrap;gap:8px}.slot{background:#090909;color:var(--cream);border:1px solid #5a492d;padding:9px 12px}.slot.selected{background:var(--gold);color:#17120a}.slot:disabled{opacity:.3;text-decoration:line-through;cursor:not-allowed}
+.hidden{display:none!important}.notice{font-size:12px;color:#aaa;line-height:1.6}.message{margin-top:12px;padding:12px;border:1px solid var(--gold);color:var(--cream);display:none}
+.admin-list{display:grid;gap:10px;margin-top:15px}.appointment{background:#201c16;border:1px solid var(--line);padding:14px;display:flex;justify-content:space-between;gap:12px;align-items:center}.appointment small{color:#bbb}.actions{display:flex;gap:8px;flex-wrap:wrap}
+footer{text-align:center;color:#888;border-top:1px solid #29241d;padding:30px;font-size:12px;letter-spacing:2px}
+@media(max-width:650px){header{padding:16px 5%}.logo{font-size:16px}.hero{padding:55px 7%}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.appointment{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="logo">RF FIOS PREMIUM<small>BELEZA · ESTILO · ELEGÂNCIA</small></div><button class="secondary" id="adminOpen">Área administrativa</button></header>
+<section class="hero"><div class="kicker">SUA BELEZA, NOSSA ASSINATURA</div><h1>Realce sua beleza.<br><em>Viva sua essência.</em></h1><p>Um espaço pensado para valorizar você, com cuidado em cada detalhe e uma experiência de beleza especial.</p><a class="btn" href="#agendar">AGENDAR HORÁRIO</a></section>
+<main id="servicos"><div class="heading"><div class="kicker">EXPERIÊNCIA PREMIUM</div><h2>Nossos serviços</h2><p>Escolha seu momento de cuidado.</p></div><div class="services" id="serviceCards"><article class="service"><h3>Cabelos</h3><p>Cortes, escova e tratamentos.</p></article><article class="service"><h3>Coloração</h3><p>Cor, brilho e renovação do visual.</p></article><article class="service"><h3>Unhas e beleza</h3><p>Cuidados especiais para você.</p></article></div></main>
+<section class="booking-area" id="agendar"><main><div class="heading"><div class="kicker">RESERVE SEU MOMENTO</div><h2>Agende seu horário</h2><p>Escolha o serviço, a data e um horário disponível.</p></div>
+<div class="panel"><form id="bookingForm"><div class="grid">
+<div class="field"><label>NOME</label><input id="clientName" required maxlength="100" placeholder="Seu nome"></div>
+<div class="field"><label>WHATSAPP</label><input id="phone" required maxlength="30" placeholder="(00) 00000-0000"></div>
+<div class="field"><label>SERVIÇO</label><select id="serviceSelect" required></select></div>
+<div class="field"><label>DATA</label><input id="date" type="date" required></div>
+<div class="field full"><label>HORÁRIOS DISPONÍVEIS</label><div class="slots" id="slots"></div></div>
+<div class="field full"><label>OBSERVAÇÃO (OPCIONAL)</label><textarea id="notes" rows="2" maxlength="500"></textarea></div>
+</div><button type="submit">SOLICITAR AGENDAMENTO</button><div class="message" id="bookingMessage"></div></form></div></main></section>
+<main id="adminPanel" class="hidden"><div class="heading"><div class="kicker">GESTÃO DO SALÃO</div><h2>Painel administrativo</h2><p>Gerencie os pedidos de agendamento.</p></div>
+<div id="loginBox" class="panel"><div class="field"><label>E-MAIL</label><input id="adminEmail" type="email" placeholder="E-mail cadastrado"></div><div class="field"><label>SENHA</label><input id="adminPassword" type="password" placeholder="Senha"></div><button id="loginBtn">ENTRAR</button><p class="notice">O usuário administrador deve ser criado no painel do Supabase, conforme o guia de instalação.</p><div class="message" id="loginMessage"></div></div>
+<div id="dashboard" class="hidden"><div class="actions"><button id="refreshBtn">Atualizar agenda</button><button class="secondary" id="logoutBtn">Sair</button></div><div class="admin-list" id="appointments"></div><h3 style="font-family:Georgia;color:var(--cream)">Cadastrar serviço</h3><div class="panel"><div class="grid"><div class="field"><label>NOME DO SERVIÇO</label><input id="newService" placeholder="Ex.: Escova"></div><div class="field"><label>PREÇO (R$)</label><input id="newPrice" type="number" min="0" step="0.01" placeholder="Ex.: 80"></div><div class="field"><label>DURAÇÃO (MINUTOS)</label><input id="newDuration" type="number" min="15" step="15" value="60"></div></div><button id="addService">Adicionar serviço</button><div class="message" id="serviceMessage"></div></div></div>
+</main><footer>RF FIOS PREMIUM · BELEZA EM CADA DETALHE</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script><script src="app.js"></script>
+</body></html>

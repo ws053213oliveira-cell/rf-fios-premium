@@ -1,0 +1,46 @@
+# RF FIOS PREMIUM — versão online inicial
+
+Este pacote é um ponto de partida funcional para ligar o site a um banco Supabase. O plano gratuito de terceiros pode ter limites, pausas por inatividade ou mudar suas condições. Não há cobrança feita por este projeto.
+
+## O que já está preparado
+- Site responsivo com identidade preta e dourada.
+- Formulário público de solicitação de horário.
+- Consulta de horários ocupados sem mostrar dados pessoais.
+- Login administrativo por e-mail e senha do Supabase.
+- Painel para listar, confirmar e cancelar pedidos.
+- Cadastro de serviços e preços.
+
+## Antes de publicar
+Este pacote ainda NÃO está conectado a um projeto real. Você ou sua irmã precisarão criar as contas, copiar as chaves e configurar o domínio gratuito. Não compartilhe a chave `service_role` do Supabase; o site usa somente a chave pública `anon`.
+
+## 1. Criar o banco no Supabase
+1. Acesse https://supabase.com e crie uma conta/projeto.
+2. No projeto, abra SQL Editor > New query.
+3. Copie todo o conteúdo de `supabase-schema.sql`, cole e execute.
+4. Em Authentication > Users, crie o usuário da proprietária com e-mail e senha fortes.
+5. Guarde o endereço do projeto e a chave pública `anon` (Project Settings > API).
+
+**Importante sobre permissões:** as políticas deste protótipo tratam qualquer usuário autenticado como administrador. Não crie contas para clientes. Para um sistema comercial multiusuário, restrinja o acesso administrativo por uma tabela de equipe e políticas específicas antes de abrir o painel a outras pessoas.
+
+## 2. Conectar o site
+1. Abra `config.js`.
+2. Substitua `COLE_A_URL_DO_SUPABASE` e `COLE_A_CHAVE_ANON` pelos valores do seu projeto.
+3. Não coloque a chave `service_role` no navegador.
+
+## 3. Publicar gratuitamente na Vercel
+1. Crie uma conta em https://vercel.com.
+2. Crie um repositório GitHub e envie os arquivos `index.html`, `app.js` e `config.js`.
+3. Na Vercel, escolha Add New > Project e importe esse repositório.
+4. Como é um site estático, não precisa de comando de build; publique.
+5. A Vercel fornecerá um endereço `*.vercel.app`.
+
+## 4. Ajustes que ainda precisam ser feitos antes de usar com clientes
+- Confirmar os horários reais, dias de funcionamento, intervalos e duração dos procedimentos.
+- Preencher os preços reais (os valores iniciais estão zerados como exemplo).
+- Definir fuso horário e regras de antecedência/cancelamento.
+- Configurar WhatsApp manualmente ou por integração própria.
+- Adicionar proteção anti-spam/rate limit e validações de conflito no banco. A restrição única impede duas reservas no mesmo horário exato, mas o protótipo ainda não calcula sobreposição de procedimentos com durações diferentes.
+- Testar o fluxo completo antes de divulgar.
+
+## Observação
+Este é um protótipo técnico para configuração, não uma plataforma pronta para receber reservas reais sem revisão. A disponibilidade e as condições dos planos gratuitos pertencem aos respectivos provedores e podem mudar.
